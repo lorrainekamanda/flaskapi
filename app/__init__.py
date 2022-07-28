@@ -9,7 +9,7 @@ import logging
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '01fcfdbeca8650acf466a53d4b45f24e'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://lorrainekamanda:leilanjeri@localhost/car'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://lorrainekamanda:leilanjeri@localhost:5433/car'
 db = SQLAlchemy(app)
 migrate  = Migrate(app,db)
 
