@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import psycopg2
 from flask_heroku import Heroku
+import logging
 
 
 app = Flask(__name__)
@@ -12,5 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://lorrainekamanda:l
 db = SQLAlchemy(app)
 migrate  = Migrate(app,db)
 heroku = Heroku(app)
+
+app.logger.addHandler(logging.streamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 from app import views
