@@ -2,7 +2,7 @@ from flask import Flask,render_template,redirect,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import psycopg2
-from flask.ext.heroku import Heroku
+from flask_heroku import Heroku
 
 
 app = Flask(__name__)
