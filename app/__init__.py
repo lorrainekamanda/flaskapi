@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 migrate  = Migrate(app,db)
 
 
-app.logger.addHandler(logging.streamHandler(sys.stdout))
+
 app.logger.setLevel(logging.ERROR)
 
 from app import views
