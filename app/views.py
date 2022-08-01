@@ -5,7 +5,6 @@ import os.path as op
 from flask import Flask,render_template,redirect,url_for,request,jsonify,Response,make_response,url_for
 from app import app,db
 from app.models import Car
-from app.forms import Form
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
