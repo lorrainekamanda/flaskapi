@@ -1,15 +1,24 @@
 #!/usr/bin/python3
 import secrets
 import os
-from flask import Flask,render_template,redirect,url_for,request,jsonify,Response
+import os.path as op
+from flask import Flask,render_template,redirect,url_for,request,jsonify,Response,make_response,url_for
 from app import app,db
 from app.models import Car
 from app.forms import Form
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from flask_admin import Admin,form
+from flask_admin.contrib.sqla import ModelView
+from  markupsafe import Markup
 
 ma = Marshmallow(app)
 CORS(app)
+
+admin = Admin(app,template_mode='bootstrap4')
+
+
 
 @app.route('/')
 def index():
@@ -18,49 +27,44 @@ def index():
     return render_template('home.html',posts=posts) 
 
 
-def upload_pic(save_picture):
-    random_hex = secrets.token_hex(8)
-    _,f_ext = os.path.splitext(save_picture.filename)
 
-    picture_name = random_hex + f_ext
-    load = os.path.join(app.root_path,'static/img/',picture_name)
+    
+# Image url
+file_path = op.join(op.dirname(__file__), 'static/img')
+try:
+    os.mkdir(file_path)
+except OSError:
+    pass  
 
-    save_picture.save(load)
-    return picture_name
+    
+class ImageView(ModelView):
+    
+    # Add ImageUpload field to Admin .
+    
+    form_extra_fields = {
+        'image_file': form.ImageUploadField('Car',
+                                      base_path=file_path,
+                                      thumbnail_size=(100, 100, True))
+    }
+
+admin.add_view(ImageView(Car, db.session))
 
 
-@app.route('/form',methods = ['GET','POST'])
-
-def submit():
-        form = Form()
-        
-        if form.validate_on_submit():
-            picture_path = upload_pic(form.image_file.data)
-            
-            car = Car(name = form.name.data,image_file = picture_path)
-            db.session.add(car)
-            db.session.commit()     
-            return redirect(url_for('index'))
-
-        
-        picture = url_for('static',filename=('img/'+image_file),code = 301)
-       
-
-        return render_template('form.html', title='Form', form=form,picture=picture)
-
-class CarSchema(ma.Schema):
+# creating serialized api data        
+class CarSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        fields = ('id','name','image_file')
+        model = Car
+        fields = ('id','name','gearbox','brand','price','fuel','motor','register','image_file')
 
 car_schema = CarSchema()
 cars_schema = CarSchema(many=True)
  
 @app.route('/api',methods = ['GET'])
-def books():
-    cars = Car.query.all()
+def get():
+    cars = db.session.query(Car).all()
     results = cars_schema.dump(cars)
     
-    return jsonify(results)
+    return (jsonify(results))
 
         
 

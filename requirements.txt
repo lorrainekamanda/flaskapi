@@ -1,6 +1,9 @@
 alembic==1.7.7
+certifi==2022.6.15
 click==8.0.4
+cloudinary==1.29.0
 Flask==2.0.3
+Flask-Admin==1.6.0
 Flask-Cors==3.0.10
 flask-heroku==0.1.9
 flask-marshmallow==0.14.0
@@ -16,10 +19,13 @@ Jinja2==3.0.3
 Mako==1.1.6
 MarkupSafe==2.0.1
 marshmallow==3.14.1
+marshmallow-sqlalchemy==0.27.0
 psycopg2==2.9.3
 six==1.16.0
 SQLAlchemy==1.4.39
+SQLAlchemy-Utils==0.38.3
 typing_extensions==4.1.1
+urllib3==1.26.11
 Werkzeug==2.0.3
 WTForms==3.0.0
 zipp==3.6.0
