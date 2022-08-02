@@ -27,6 +27,7 @@ class Car(db.Model):
     brand  = db.Column(ChoiceType(BRAND_TYPES))
     gearbox = db.Column(db.String(50))
     image_file = db.Column(db.String(120),unique = True)
+    body_type = db.Column(db.String(50))
 
 
     
