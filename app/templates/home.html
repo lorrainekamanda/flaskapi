@@ -22,7 +22,7 @@
 .main,
 .sidebar {
 
-  padding: 5px;
+  padding: 15px;
   background-color: #fff;
 }
 
@@ -47,7 +47,7 @@
 
 <body>
     <div class="container">
-    <div class="row wrapper" style="margin-top: 50px;">
+    <div class="row wrapper" >
       
     <div class="col-md-3 col-sm-12 col-xs-12 sidebar" style="text-align: left;">
         <div class="card" style="max-width: 300px;">
@@ -76,7 +76,7 @@
     </div>
     {% for post in posts %}
     
-    <div class="col-md-8 main" style="text-align: center;"  >
+    <div class="col-md-8 main" style="text-align: center;border: 3px solid red;"  >
         <div style="height: 40px;background-color: rgb(252, 217, 174);">
           <h4>{{post.name}}</h4>
                

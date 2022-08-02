@@ -2,7 +2,7 @@ from app import db
 import sqlalchemy_utils
 from sqlalchemy_utils.types.choice import ChoiceType
 
-# database schema
+# database model
 class Car(db.Model):
     BRAND_TYPES = [
          ('mercedes', 'Mercedes'),
