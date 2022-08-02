@@ -8,6 +8,7 @@ import logging
 
 app = Flask(__name__)
 
+
 # database configurations
 
 prodURI = 'postgres://updljteaflhium:c0151e04752741e92119e1dc3c19132eaabe91ae3332085c0459d4dbae9b743e@ec2-44-208-88-195.compute-1.amazonaws.com:5432/d462304k9n45sm'
