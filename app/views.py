@@ -19,15 +19,6 @@ admin = Admin(app,template_mode='bootstrap4')
 
 
 
-@app.route('/')
-def index():
-    
-    posts = Car.query.all()
-    return render_template('home.html',posts=posts) 
-
-
-
-    
 # Image url
 file_path = op.join(op.dirname(__file__), 'static/img')
 try:
@@ -64,67 +55,6 @@ def get():
     results = cars_schema.dump(cars)
     
     return (jsonify(results))
-
-@app.route('/petrol',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.fuel =="petrol")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(results))  
-
-@app.route('/diesel',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.fuel =="diesel")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(results))  
-
-
-@app.route('/electric',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.fuel =="electric")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(results))      
-
-@app.route('/mercedes',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.brand =="mercedes")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(results))   
-
-
-@app.route('/bmw',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.brand =="bmw")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(results))   
-
-
-@app.route('/vox',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.brand =="vox")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(result))
-
-
-@app.route('/range',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.brand =="rangerover")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(result))
-
-
-@app.route('/other',methods = ['GET'])
-def get():
-    cars = db.session.query(Car).filter(Car.brand =="Other")
-    results = cars_schema.dump(cars)
-    
-    return (jsonify(result))
 
 if __name__ == '__main__': 
     app.run(debug=False)
